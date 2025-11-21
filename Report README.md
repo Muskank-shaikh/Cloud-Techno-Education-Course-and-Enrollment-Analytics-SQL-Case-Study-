@@ -105,7 +105,7 @@ Suggested: Workshops, hybrid events, webinars.
 
 MySQL – Data analysis & queries
 
-Canva – Presentation
+
 
 🗂 Database: EducationDB
 
@@ -141,75 +141,4 @@ student_id	INT PK AI
 name	VARCHAR(50)
 email	VARCHAR(100)
 country	VARCHAR(30)
-join_date	DATE
-🧩 SQL Queries Used
-1. Understand student join dates
-select name, monthname(join_date) as months,
-year(join_date) as joining_year 
-from students;
-
-2. Courses with their instructors
-select c.course_name, i.instructor_name, i.specialization 
-from instructors i 
-join courses c on i.instructor_id = c.instructor_id
-group by c.course_name, i.instructor_name, i.specialization;
-
-3. Student registration trend
-select count(join_date), monthname(join_date) as joining_month 
-from students
-group by monthname(join_date)
-order by monthname(join_date) desc;
-
-4. Enrollment trend
-select s.name, monthname(e.enrollment_date), count(*) as students_enrolled
-from enrollments e 
-join students s on e.student_id = s.student_id
-group by s.name, monthname(e.enrollment_date)
-order by monthname(e.enrollment_date) desc;
-
-5. Stored procedure for automation
-delimiter $$ 
-create procedure coursenrolls(out joining_month varchar(50), out CourseName varchar(50))
-begin 
-select  s.name, c.course_name, 
-monthname(e.enrollment_date) into joining_month 
-from enrollments e 
-join students s on e.student_id = s.student_id 
-join courses c on e.course_id = c.course_id
-where c.course_name = CourseName ;
-end $$ 
-delimiter ;
-
-call courseenrolls('june','python for beginners',@result);
-select @result as re_sults;
-
-6. Analyze course price per month
-select distinct c.course_name, c.price, monthname(e.enrollment_date)
-from enrollments e 
-join courses c on e.course_id = c.course_id
-group by c.course_name, c.price, monthname(e.enrollment_date);
-
-7. Find highest priced courses
-select distinct course_name, price 
-from courses 
-where price > 50;
-
-8. Monthly revenue
-select sum(c.price) as revenue, monthname(e.enrollment_date) 
-from enrollments e 
-join courses c on e.course_id = c.course_id 
-where year(enrollment_date) = 2023
-group by monthname(e.enrollment_date);
-
-9. Course performance by rating
-select sum(e.rating), c.course_name
-from enrollments e 
-join courses c on e.course_id = c.course_id 
-join students s on e.student_id = s.student_id
-where e.rating is not null
-group by c.course_name;
-
-10. Number of courses still in progress
-select count(*)  
-from enrollments 
-where rating is null;
+join_date	date
