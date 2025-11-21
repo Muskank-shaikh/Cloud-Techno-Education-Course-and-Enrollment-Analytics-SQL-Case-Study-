@@ -142,3 +142,7 @@ name	VARCHAR(50)
 email	VARCHAR(100)
 country	VARCHAR(30)
 join_date	date
+
+If your Institute or ed-tech team wants help analyzing student performance, course demand or instructors insights 
+I'd be happy to collaborate. Reach out to me through linkedin website is mentioned in my profile.  
+
