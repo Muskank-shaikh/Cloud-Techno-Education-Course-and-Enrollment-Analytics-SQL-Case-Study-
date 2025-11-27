@@ -1,16 +1,23 @@
+SECTION 1 : BASIC TABLE CHECKS
+    
 use educationdb;
 select * from students;
+select * from courses;
+select * from enrollments;
+
+
+SECTION 2: DATA EXTRACTION FROM TABLES
 select name, monthname(join_date) as months,
 year(join_date) as joining_year from students;
 
-select * from courses;
-select * from enrollments;
+SECTION 3: INSTRUCTOR ANALYSIS 
 select  instructor_name  from instructors
 where specialization = 'Data Science' ;
 
 select count(instructor_name) 
 from instructors where specialization = 'Data Science';
 
+SECTION 4: JOINS (COURSES + INSTRUCTORS)
 select c.course_name, i.instructor_name, i.specialization 
 from instructors i 
 join courses c on i.instructor_id = c.instructor_id
@@ -24,6 +31,7 @@ specialization);
 select name,
 monthname(join_date), dayname(join_date) from students
 ;
+
 
 select count(name), monthname(join_date) as joining_month from students
 where monthname(join_date) between 'march' and 'may'
